@@ -1,0 +1,13 @@
+version: '3'
+services:
+  php:
+    container_name: "hyperf-example-app"
+    image: hyperf/hyperf:8.1-alpine-v3.16-dev
+    tty: true
+    volumes:
+      - '.:/app'
+    networks:
+      - web
+networks:
+  web:
+    driver: bridge
