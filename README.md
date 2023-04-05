@@ -1,8 +1,8 @@
 <div align="center">
-   <img src="https://camo.githubusercontent.com/94f76600bb4b1dc9941bcfcc40e89eda69ed394536b10b756e02c57c4665a6d6/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f6879706572662f6879706572662f646f63732f6c6f676f2e706e67" alt="logo">
+   <img src="https://user-images.githubusercontent.com/28494067/229952537-50a4c12d-e253-4120-a12f-7fa65a7970e5.png" alt="logo" width="20%">
 </div>
 
-Project Structure Template
+Hyperf Template Example App
 =======================================
 
 [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-green)](LICENCE)
