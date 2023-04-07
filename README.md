@@ -54,10 +54,6 @@ Por favor, veja [CHANGELOG](CHANGELOG.md) para obter mais informações sobre o 
 
 Quer fazer parte desse projeto? Clique AQUI e leia [como contribuir](CONTRIBUTING.md).
 
-## Segurança
-
-Se você descobrir algum problema relacionado à segurança, envie um e-mail para reinangabriel1520@gmail.com em vez de usar o issue.
-
 ### Licença
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
