@@ -11,7 +11,7 @@ jobs:
   composer:
     runs-on: ubuntu-latest
     container:
-      image: "docker://$HYPERF_IMAGE"
+      image: docker://${{ HYPERF_IMAGE }}
     steps:
       - uses: actions/checkout@v3
       - name: Install
@@ -27,7 +27,7 @@ jobs:
     needs:
       - composer
     container:
-      image: "docker://$HYPERF_IMAGE"
+      image: docker://${{ HYPERF_IMAGE }}
     steps:
       - uses: actions/checkout@v3
       - name: Restore cached vendor
