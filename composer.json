@@ -25,7 +25,6 @@
         "hyperf/memory": "~3.0.0",
         "hyperf/metric": "~3.0.0",
         "hyperf/process": "~3.0.0",
-        "hyperf/redis": "~3.0.0",
         "hyperf/tracer": "~3.0.0",
         "hyperf/validation": "~3.0.0"
     },
