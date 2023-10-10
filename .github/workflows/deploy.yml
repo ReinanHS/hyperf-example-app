@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  HYPERF_IMAGE: registry.gitlab.com/hyper-coder-labs/infra/docker-php-runtimes/php-dev-8.2-swoole:latest
+  HYPERF_IMAGE: reinanhs/php-dev-8.2-swoole:latest
 
 jobs:
   composer:
