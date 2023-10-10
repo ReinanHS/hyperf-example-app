@@ -9,18 +9,23 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Controller;
 
-class IndexController extends AbstractController
-{
-    public function index()
-    {
-        $user = $this->request->input('user', 'Hyperf');
-        $method = $this->request->getMethod();
+use Hyperf\HttpServer\Request;
+use Hyperf\HttpServer\Response;
+use Psr\Http\Message\ResponseInterface;
 
-        return [
+class IndexController
+{
+    public function index(Request $request, Response $response): ResponseInterface
+    {
+        $user = $request->input('user', 'Hyperf');
+        $method = $request->getMethod();
+
+        return $response->json([
             'method' => $method,
             'message' => "Hello {$user}.",
-        ];
+        ]);
     }
 }

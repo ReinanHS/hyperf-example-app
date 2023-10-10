@@ -10,5 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
-    Hyperf\Tracer\Aspect\CoroutineAspect::class,
+    'locale' => 'pt_BR',
+    'fallback_locale' => 'pt_BR',
+    'path' => BASE_PATH . '/storage/languages',
 ];

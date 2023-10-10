@@ -56,4 +56,4 @@ Quer fazer parte desse projeto? Clique AQUI e leia [como contribuir](CONTRIBUTIN
 
 ### Licença
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.

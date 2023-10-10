@@ -1,16 +1,42 @@
 version: '3'
+
 services:
+  mysql:
+    container_name: "hyperf-example-database"
+    image: 'mysql:8.1.0'
+    working_dir: /application
+    volumes:
+      - 'mysql_data:/application'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hyperf
+      - MYSQL_USER=hypercoder
+      - MYSQL_PASSWORD=secret
+    ports:
+      - '39002:3306'
+    networks:
+      - web
   app:
     container_name: "hyperf-example-app"
-    image: hyperf/hyperf:8.1-alpine-v3.15-swoole
+    build: .docker/development
+    user: "${UID}:${GID}"
     working_dir: /app
+    environment:
+      - PHP_IDE_CONFIG=serverName=hyperf-example-app
     tty: true
     volumes:
       - '.:/app'
     networks:
       - web
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "9501:9501"
+
 networks:
   web:
     driver: bridge
+
+volumes:
+  mysql_data: {}
+
