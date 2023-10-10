@@ -1,0 +1,35 @@
+name: Deployment process
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  composer:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://hyperf/hyperf:8.2-alpine-v3.18-swoole-v5.0
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install
+        run: composer install
+      - name: Cache vendor
+        id: cache-vendor
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-vendor
+  co-phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://hyperf/hyperf:8.2-alpine-v3.18-swoole-v5.0
+    steps:
+      - uses: actions/checkout@v3
+      - name: Restore cached vendor
+        id: cache-vendor-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-vendor
+      - name: Test
+        run: vendor/bin/co-phpunit --prepend test/bootstrap.php -c phpunit.xml
