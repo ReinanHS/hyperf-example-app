@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * This file is part of a template project.
  *
- * @link     https://www.hyperf.io
- * @document https://hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * @link     https://github.com/reinanhs/hyperf-example-app
+ * @license  https://github.com/reinanhs/hyperf-example-app/LICENSE
+ * @author   @reinanhs
  */
+
 namespace App\Listener;
 
 use Hyperf\Command\Event\AfterExecute;
