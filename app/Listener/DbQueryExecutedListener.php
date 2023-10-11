@@ -11,21 +11,18 @@ declare(strict_types=1);
 
 namespace App\Listener;
 
+use Hyperf\Collection\Arr;
 use Hyperf\Database\Events\QueryExecuted;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
-use Hyperf\Utils\Arr;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 #[Listener]
 class DbQueryExecutedListener implements ListenerInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(ContainerInterface $container)
     {
@@ -39,9 +36,6 @@ class DbQueryExecutedListener implements ListenerInterface
         ];
     }
 
-    /**
-     * @param QueryExecuted $event
-     */
     public function process(object $event): void
     {
         if ($event instanceof QueryExecuted) {
@@ -59,7 +53,7 @@ class DbQueryExecutedListener implements ListenerInterface
                 }
             }
 
-            $this->logger->info(sprintf('[%s] %s', $event->time, $sql));
+            $this->logger->info(sprintf('[%s] %s', $event->time ?? 0, $sql));
         }
     }
 }

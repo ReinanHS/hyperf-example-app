@@ -74,3 +74,19 @@ jobs:
           key: ${{ runner.os }}-vendor
       - name: Style Check
         run: php vendor/bin/php-cs-fixer check --diff
+  psalm:
+    runs-on: ubuntu-latest
+    needs:
+      - composer
+    container:
+      image: docker://reinanhs/php-dev-8.2-swoole:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Restore cached vendor
+        id: cache-vendor-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-vendor
+      - name: Static Check
+        run: php ./vendor/bin/psalm --output-format=console --show-info=true

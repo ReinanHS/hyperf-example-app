@@ -34,7 +34,8 @@
         "hyperf/testing": "~3.0.0",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^1.0",
-        "swoole/ide-helper": "^5.0"
+        "swoole/ide-helper": "^5.0",
+        "vimeo/psalm": "^5.15"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",
