@@ -12,19 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: "Validate composer.json and composer.lock"
-        run: "composer validate --strict"
-      - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+        run: composer validate --strict
       - name: Install
         run: composer install
       - name: "Cache dependencies installed with composer"
         uses: actions/cache@v3
         id: cache-vendor
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
+          path: vendor
+          key: "composer-${{ hashFiles('composer.lock') }}"
   co-phpunit:
     runs-on: ubuntu-latest
     needs:
@@ -38,7 +34,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-vendor
+          key: "composer-${{ hashFiles('composer.lock') }}"
       - name: Test
         run: vendor/bin/co-phpunit --prepend test/bootstrap.php -c phpunit.xml
   coverage:
@@ -55,7 +51,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-vendor
+          key: "composer-${{ hashFiles('composer.lock') }}"
       - name: Test
         run: XDEBUG_MODE=coverage vendor/bin/co-phpunit --prepend test/bootstrap.php -c phpunit.xml --coverage-html cover/ --testsuite=u
       - name: Archive coverage
@@ -77,7 +73,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-vendor
+          key: "composer-${{ hashFiles('composer.lock') }}"
       - name: Style Check
         run: php vendor/bin/php-cs-fixer check --diff
   psalm:
@@ -93,7 +89,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-vendor
+          key: "composer-${{ hashFiles('composer.lock') }}"
       - name: Static Check
         run: php vendor/bin/psalm --output-format=console --show-info=true
   push_to_registry:
