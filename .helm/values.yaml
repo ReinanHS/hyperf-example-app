@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: reasno/cloudnative-hyperf
-  tag: latest
+  repository: reinanhs/hyperf-example-app
+  tag: main
   pullPolicy: IfNotPresent
 
 nameOverride: ""
