@@ -1,107 +1,25 @@
-name: Testing process
+name: Deploy process
 
 on:
   push:
-    branches: [ "main" ]
+    tags:
+      - 'v*.*.*'
 
 jobs:
-  composer:
-    runs-on: ubuntu-latest
-    container:
-      image: docker://reinanhs/php-dev-8.2-swoole:latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: "Validate composer.json and composer.lock"
-        run: composer validate --strict
-      - name: Install
-        run: composer install
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v3
-        id: cache-vendor
-        with:
-          path: vendor
-          key: "composer-${{ hashFiles('composer.lock') }}"
-  co-phpunit:
-    runs-on: ubuntu-latest
-    needs:
-      - composer
-    container:
-      image: docker://reinanhs/php-dev-8.2-swoole:latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Restore cached vendor
-        id: cache-vendor-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: vendor
-          key: "composer-${{ hashFiles('composer.lock') }}"
-      - name: Test
-        run: vendor/bin/co-phpunit --prepend test/bootstrap.php -c phpunit.xml
-  coverage:
-    runs-on: ubuntu-latest
-    needs:
-      - composer
-      - co-phpunit
-    container:
-      image: docker://reinanhs/php-dev-8.2-swoole:latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Restore cached vendor
-        id: cache-vendor-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: vendor
-          key: "composer-${{ hashFiles('composer.lock') }}"
-      - name: Test
-        run: XDEBUG_MODE=coverage vendor/bin/co-phpunit --prepend test/bootstrap.php -c phpunit.xml --coverage-html cover/ --testsuite=u
-      - name: Archive coverage
-        uses: actions/upload-artifact@v3
-        with:
-          name: cover-page
-          path: cover/
-          retention-days: 1
-  php-cs-fixer:
-    runs-on: ubuntu-latest
-    needs:
-      - composer
-    container:
-      image: docker://reinanhs/php-dev-8.2-swoole:latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Restore cached vendor
-        id: cache-vendor-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: vendor
-          key: "composer-${{ hashFiles('composer.lock') }}"
-      - name: Style Check
-        run: php vendor/bin/php-cs-fixer check --diff
-  psalm:
-    runs-on: ubuntu-latest
-    needs:
-      - composer
-    container:
-      image: docker://reinanhs/php-dev-8.2-swoole:latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Restore cached vendor
-        id: cache-vendor-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: vendor
-          key: "composer-${{ hashFiles('composer.lock') }}"
-      - name: Static Check
-        run: php vendor/bin/psalm --output-format=console --show-info=true
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
-    needs:
-      - co-phpunit
-      - php-cs-fixer
-      - psalm
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -121,5 +39,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.RELEASE_VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
