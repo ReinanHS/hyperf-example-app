@@ -13,17 +13,32 @@ return [
         'handler' => [
             'class' => Monolog\Handler\StreamHandler::class,
             'constructor' => [
+                'stream' => 'php://stdout',
+                'messageType' => Monolog\Handler\ErrorLogHandler::OPERATING_SYSTEM,
+                'level' => Monolog\Level::Info,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\JsonFormatter::class,
+        ],
+        'PsrLogMessageProcessor' => [
+            'class' => Monolog\Processor\PsrLogMessageProcessor::class,
+        ],
+    ],
+    'test' => [
+        'handler' => [
+            'class' => Monolog\Handler\StreamHandler::class,
+            'constructor' => [
                 'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
-                'level' => Monolog\Logger::DEBUG,
+                'messageType' => Monolog\Handler\ErrorLogHandler::OPERATING_SYSTEM,
+                'level' => Monolog\Level::Debug,
             ],
         ],
         'formatter' => [
             'class' => Monolog\Formatter\LineFormatter::class,
-            'constructor' => [
-                'format' => null,
-                'dateFormat' => 'Y-m-d H:i:s',
-                'allowInlineLineBreaks' => true,
-            ],
+        ],
+        'PsrLogMessageProcessor' => [
+            'class' => Monolog\Processor\PsrLogMessageProcessor::class,
         ],
     ],
 ];

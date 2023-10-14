@@ -25,4 +25,7 @@ Hyperf\Di\ClassLoader::init();
 
 $container = require BASE_PATH . '/config/container.php';
 
+$config = $container->get(Hyperf\Contract\ConfigInterface::class);
+$config->set('logger.default', $config->get('logger.test'));
+
 $container->get(Hyperf\Contract\ApplicationInterface::class);

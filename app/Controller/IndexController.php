@@ -32,7 +32,7 @@ class IndexController
             throw new HttpClientException();
         }
 
-        $this->logger->debug('Requisição de experimento realizada com sucesso');
+        $this->logger->info('Requisição de experimento realizada com sucesso');
         return $response->json([
             'method' => $method,
             'message' => "Hello {$user}.",
