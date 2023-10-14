@@ -40,7 +40,7 @@ class IndexControllerUTest extends TestCase
             ->willReturn('Hyperf');
 
         $mockedLogger->expects($this->once())
-            ->method('debug')
+            ->method('info')
             ->with('Requisição de experimento realizada com sucesso');
 
         $mockedConfig->expects($this->once())
