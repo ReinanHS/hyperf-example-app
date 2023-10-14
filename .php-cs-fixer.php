@@ -79,6 +79,7 @@ return (new PhpCsFixer\Config())
         'single_quote' => true,
         'standardize_not_equals' => true,
         'multiline_comment_opening_closing' => true,
+        'php_unit_test_class_requires_covers' => false,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

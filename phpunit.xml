@@ -9,7 +9,8 @@
         </include>
         <exclude>
             <file>./app/Model/Model.php</file>
-            <file>./app/Model/Model.php</file>
+            <file>./app/Listener/DbQueryExecutedListener.php</file>
+            <file>./app/Listener/ResumeExitCoordinatorListener.php</file>
         </exclude>
     </coverage>
     <testsuites>

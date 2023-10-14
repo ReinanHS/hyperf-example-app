@@ -13,6 +13,7 @@ namespace HyperfTest\Unit\Controller;
 
 use App\Controller\IndexController;
 use Hyperf\Config\Config;
+use Hyperf\Engine\Exception\HttpClientException;
 use Hyperf\HttpMessage\Server\Response as ServerResponse;
 use Hyperf\HttpServer\Request;
 use Hyperf\HttpServer\Response;
@@ -22,7 +23,6 @@ use Symfony\Component\HttpFoundation\Response as StatusCodes;
 
 /**
  * @internal
- * @coversNothing
  */
 class IndexControllerUTest extends TestCase
 {
@@ -52,5 +52,28 @@ class IndexControllerUTest extends TestCase
         $response = $controller->index($mockedRequest, $mockedResponse);
 
         $this->assertEquals(StatusCodes::HTTP_OK, $response->getStatusCode());
+    }
+
+    public function testIndexRequestWithError(): void
+    {
+        $mockedRequest = $this->createMock(Request::class);
+        $mockedResponse = new Response(new ServerResponse());
+
+        $mockedLogger = $this->createMock(Logger::class);
+        $mockedConfig = $this->createMock(Config::class);
+
+        $mockedRequest->expects($this->once())
+            ->method('input')
+            ->with('user', 'Hyperf')
+            ->willReturn('error');
+
+        $mockedLogger->expects($this->once())
+            ->method('error')
+            ->with('Foi detectado um novo erro de exemplo na aplicação');
+
+        $this->expectException(HttpClientException::class);
+
+        $controller = new IndexController($mockedLogger, $mockedConfig);
+        $controller->index($mockedRequest, $mockedResponse);
     }
 }

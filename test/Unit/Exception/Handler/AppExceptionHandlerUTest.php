@@ -19,7 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
  */
 class AppExceptionHandlerUTest extends TestCase
 {
@@ -36,5 +35,14 @@ class AppExceptionHandlerUTest extends TestCase
         $response = $exceptionHandler->handle($exception, $mockedResponse);
 
         $this->assertEquals(500, $response->getStatusCode());
+    }
+
+    public function testCheckIsValid()
+    {
+        $mockedLogger = $this->createMock(StdoutLogger::class);
+        $exception = new \Exception('Exception Handler Teste');
+
+        $exceptionHandler = new AppExceptionHandler($mockedLogger);
+        $this->assertTrue($exceptionHandler->isValid($exception));
     }
 }

@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response as StatusCodes;
 
 /**
  * @internal
- * @coversNothing
  */
 class HealthCheckControllerUTest extends TestCase
 {

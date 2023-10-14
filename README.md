@@ -8,7 +8,7 @@ Hyperf Template Example App
 ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?logo=php&logoColor=white)
 [![LICENSE: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 [![Testing process](https://github.com/ReinanHS/hyperf-example-app/actions/workflows/testing.yml/badge.svg)](https://github.com/ReinanHS/hyperf-example-app/actions/workflows/testing.yml)
-[![Coverage](https://img.shields.io/badge/PHPUnit-Coverage-a?logo=php)](https://reinanhs.github.io/hyperf-example-app)
+[![codecov](https://codecov.io/gh/ReinanHS/hyperf-example-app/graph/badge.svg?token=WAAZA84ZJ0)](https://codecov.io/gh/ReinanHS/hyperf-example-app)
 
 * * *
 
