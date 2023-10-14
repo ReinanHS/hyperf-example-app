@@ -38,7 +38,7 @@ class HealthCheckControllerUTest extends TestCase
         $mockedResponse = new Response(new ServerResponse());
 
         $controller = new HealthCheckController();
-        $response = $controller->liveness($mockedResponse);
+        $response = $controller->readiness($mockedResponse);
 
         $this->assertEquals(StatusCodes::HTTP_ACCEPTED, $response->getStatusCode());
     }

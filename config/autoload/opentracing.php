@@ -20,6 +20,7 @@ return [
         'db' => env('TRACER_ENABLE_DB', false),
         'method' => env('TRACER_ENABLE_METHOD', false),
         'exception' => env('TRACER_ENABLE_EXCEPTION', false),
+        'logger' => env('TRACER_ENABLE_LOGGER', false),
         'ignore_exceptions' => [],
     ],
     'tracer' => [
@@ -32,7 +33,7 @@ return [
                 'ipv6' => null,
                 'port' => 9501,
             ],
-            'reporter' => env('ZIPKIN_REPORTER', 'noop'), // kafka, http
+            'reporter' => env('ZIPKIN_REPORTER', 'http'), // kafka, http
             'reporters' => [
                 // options for http reporter
                 'http' => [

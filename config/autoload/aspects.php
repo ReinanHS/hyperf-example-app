@@ -10,4 +10,5 @@ declare(strict_types=1);
  */
 return [
     Hyperf\Tracer\Aspect\CoroutineAspect::class,
+    App\Aspect\LoggerAspect::class,
 ];

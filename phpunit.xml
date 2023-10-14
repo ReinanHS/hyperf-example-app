@@ -7,10 +7,17 @@
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <exclude>
+            <file>./app/Model/Model.php</file>
+            <file>./app/Model/Model.php</file>
+        </exclude>
     </coverage>
     <testsuites>
         <testsuite name="u">
             <directory suffix="UTest.php">./test/Unit</directory>
+        </testsuite>
+        <testsuite name="f">
+            <directory suffix="FTest.php">./test/Feature</directory>
         </testsuite>
     </testsuites>
 </phpunit>

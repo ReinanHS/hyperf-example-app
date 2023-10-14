@@ -5,8 +5,10 @@
 Hyperf Template Example App
 =======================================
 
-[![Licence: MIT](https://img.shields.io/badge/Licence-MIT-green)](LICENCE)
-[![Team](https://img.shields.io/badge/Team-General-red)](https://gitlab.com/educa-code-labs/general)
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?logo=php&logoColor=white)
+[![LICENSE: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
+[![Testing process](https://github.com/ReinanHS/hyperf-example-app/actions/workflows/testing.yml/badge.svg)](https://github.com/ReinanHS/hyperf-example-app/actions/workflows/testing.yml)
+[![Coverage](https://img.shields.io/badge/PHPUnit-Coverage-a?logo=php)](https://reinanhs.github.io/hyperf-example-app)
 
 * * *
 

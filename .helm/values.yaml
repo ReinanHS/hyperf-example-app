@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: reinanhs/hyperf-example-app
-  tag: main
+  tag: v0.0.2
   pullPolicy: IfNotPresent
 
 nameOverride: ""

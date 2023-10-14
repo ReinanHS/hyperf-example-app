@@ -13,8 +13,10 @@ LABEL maintainer="Hyperf Developers <group@hyperf.io>" version="1.0" license="MI
 ##
 # --build-arg timezone=Asia/Shanghai
 ARG timezone
+ARG version
 
 ENV TIMEZONE=${timezone:-"America/Sao_Paulo"} \
+    APP_VERSION=${version:-"v0.0.0"} \
     APP_ENV=prod \
     SCAN_CACHEABLE=(true)
 
