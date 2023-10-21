@@ -15,7 +15,7 @@ use function Hyperf\Support\env;
 
 return [
     'app_name' => env('APP_NAME', 'skeleton'),
-    'app_env' => env('APP_ENV', 'dev'),
+    'app_env' => env('APP_ENV', 'prod'),
     'app_version' => env('APP_VERSION', 'v0.0.0'),
     'scan_cacheable' => env('SCAN_CACHEABLE', false),
     StdoutLoggerInterface::class => [

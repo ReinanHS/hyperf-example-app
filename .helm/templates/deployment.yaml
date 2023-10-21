@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "hyperf.fullname" . }}
+  namespace: {{ include "namespace" . }}
   labels:
     app.kubernetes.io/name: {{ include "hyperf.name" . }}
     helm.sh/chart: {{ include "hyperf.chart" . }}
@@ -13,16 +14,25 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "hyperf.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+      app: {{ include "hyperf.name" . }}
+      version: v{{ .Chart.AppVersion }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "hyperf.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ include "hyperf.name" . }}
+        version: v{{ .Chart.AppVersion }}
+        istio: monitor
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: APP_ENV
+              value: {{ .Chart.AppVersion }}
           envFrom:
             - secretRef:
                 name: {{ template "hyperf.fullname" . }}-env

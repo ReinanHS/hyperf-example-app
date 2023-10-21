@@ -19,10 +19,18 @@ return [
             ],
         ],
         'formatter' => [
-            'class' => Monolog\Formatter\JsonFormatter::class,
+            'class' => Monolog\Formatter\GoogleCloudLoggingFormatter::class,
+            'constructor' => [
+                'includeStacktraces' => true,
+            ],
         ],
         'PsrLogMessageProcessor' => [
             'class' => Monolog\Processor\PsrLogMessageProcessor::class,
+        ],
+        'processors' => [
+            new Monolog\Processor\GitProcessor(),
+            new Monolog\Processor\MemoryUsageProcessor(),
+            new Monolog\Processor\ProcessIdProcessor(),
         ],
     ],
     'test' => [
@@ -36,9 +44,15 @@ return [
         ],
         'formatter' => [
             'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'includeStacktraces' => true,
+            ],
         ],
         'PsrLogMessageProcessor' => [
             'class' => Monolog\Processor\PsrLogMessageProcessor::class,
+        ],
+        'processors' => [
+            new Monolog\Processor\MemoryUsageProcessor(),
         ],
     ],
 ];

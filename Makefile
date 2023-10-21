@@ -8,3 +8,6 @@ php:
 	docker exec -it hyperf-example-app bash
 run:
 	docker compose run -p "9501:9501" --rm app bash -c "composer install && composer start"
+build:
+	docker build -t reinanhs/hyperf-example-app:latest .
+	docker push reinanhs/hyperf-example-app:latest

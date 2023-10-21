@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: "{{ include "hyperf.fullname" . }}-test-connection"
+  namespace: {{ include "namespace" . }}
   labels:
     app.kubernetes.io/name: {{ include "hyperf.name" . }}
     helm.sh/chart: {{ include "hyperf.chart" . }}
